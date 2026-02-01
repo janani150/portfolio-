@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Janani | Python Full-Stack Developer Portfolio</title>
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+        :root {
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --bg: #0f172a;
+        --bg-light: #1e293b;
+        --text: #e2e8f0;
+        --text-muted: #94a3b8;
+        --card: #1e293b;
+        --border: #334155;
+        }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+
+        body {
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+        }
+
+        html {
+        scroll-behavior: smooth;
+        }
+
+        .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+        padding: 1rem 5%;
+        border-bottom: 1px solid var(--border);
+        }
+
+        .nav-center {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: 2.2rem;
+        flex-wrap: wrap;
+        }
+
+        .nav-center a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        }
+
+        .nav-center a:hover,
+        .nav-center a.active {
+        color: white;
+        }
+
+        .nav-center a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -6px;
+        left: 0;
+        background: var(--primary);
+        transition: width 0.3s ease;
+        }
+
+        .nav-center a:hover::after,
+        .nav-center a.active::after {
+        width: 100%;
+        }
+
+        section {
+        padding: 6rem 5% 4rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        }
+
+        section:first-of-type {
+        padding-top: 10rem;
+        }
+
+        h1,h2 {
+        color: white;
+        margin-bottom: 1.5rem;
+        }
+
+        h1 {
+        font-size: 3.2rem;
+        line-height: 1.1;
+        }
+
+        .tagline {
+        color: var(--primary);
+        font-size: 1.3rem;
+        letter-spacing: 3px;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        }
+
+        #home {
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        .socials {
+        margin-top: 3rem;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        }
+
+        .socials a {
+        color: var(--text-muted);
+        font-size: 1.6rem;
+        transition: all 0.3s;
+        }
+
+        .socials a:hover {
+        color: var(--primary);
+        transform: translateY(-4px);
+        }
+
+        .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2rem;
+        margin: 1.5rem 0;
+        transition:transform 0.3s ease,box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .education-grid,.cert-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+        }
+
+        .skills-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 2.5rem;
+        }
+
+        .skill-category {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2rem;
+        }
+
+        .skill-category h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.4rem;
+        color: var(--primary);
+        }
+
+        .skill-category ul {
+        list-style: none;
+        font-size: 1.1rem;
+        line-height: 2;
+        }
+
+        .skill-category li {
+        position: relative;
+        padding-left: 1.8rem;
+        }
+
+        .skill-category li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-size: 1.4rem;
+        }
+
+        .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 2.2rem;
+        margin-top: 2.5rem;
+        }
+
+        .project {
+        background: var(--card);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.35s ease;
+        border: 1px solid var(--border);
+        }
+
+        .project:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .project img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-bottom: 1px solid var(--border);
+        }
+
+        .project-content {
+        padding: 1.6rem;
+        }
+
+        .project h2 {
+        font-size: 1.45rem;
+        margin-bottom: 0.8rem;
+        }
+
+        .project p {
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+        }
+
+        .my_button {
+        display: inline-block;
+        background: var(--primary);
+        color: white;
+        padding: 0.7rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+        }
+
+        .my_button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        }
+
+        .contact-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3rem;
+        justify-content: center;
+        margin-top: 3rem;
+        }
+
+        .getintouch,
+        .contact-form {
+        background: var(--card);
+        padding: 2.5rem;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        min-width: 320px;
+        flex: 1;
+        }
+
+        .contact-form label {
+        display: block;
+        margin: 1rem 0 0.5rem;
+        color: var(--text-muted);
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"] {
+        width: 100%;
+        padding: 0.9rem;
+        background: #0f172a;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: white;
+        }
+
+        .contact-form .radio-group {
+        margin: 1.2rem 0;
+        }
+
+        .contact-form button {
+        margin-top: 1.5rem;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        }
+
+        .contact-form button:hover {
+        background: var(--primary-dark);
+        }
+
+        footer {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--text-muted);
+        border-top: 1px solid var(--border);
+        margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+        h1 {
+            font-size: 2.6rem;
+        }
+        .nav-center {
+            gap: 1.2rem;
+            font-size: 0.95rem;
+        }
+        section {
+            padding: 5rem 4% 3rem;
+        }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+    <nav class="nav-center">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#works">Works</a>
+        <a href="#education">Education</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    </header>
+
+    <section id="home">
+        <p class="tagline">HELLO WORLD</p>
+        <h1>
+        I am Janani,<br />
+        a Python Full-Stack Developer<br />
+        with experience in frontend and backend development,<br />
+        based in India.
+        </h1>
+
+        <div class="socials">
+        <a href="https://www.linkedin.com/in/janani-nsp/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.figma.com/design/4bn0KUddeyveZUeE20xsGF/my-designs-demo?node-id=0-1&p=f&t=GDFKzv4nBGl2m7Zc-0"target="_blank"><i class="fab fa-figma"></i></a>
+        <a href="https://github.com/janani150" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://dribbble.com/janani-nsp" target="_blank"><i class="fab fa-dribbble"></i></a>
+
+    </div>
+    </section>
+
+    <section id="about">
+    <h1>ABOUT ME</h1>
+    <div class="card">
+        <p>
+            I’m Janani, a Python Full-Stack Developer with a strong interest in
+            building clean, responsive, and user-friendly web applications. I
+            enjoy working across the frontend and backend, turning ideas into
+            functional products.
+        </p>
+
+        <p>
+            I’m continuously learning and improving my skills through hands-on
+            projects, and I’m actively looking for opportunities to grow as a
+            developer.
+        </p>
+    </div>
+    </section>
+
+    <section id="skills">
+        <h1>My Skills</h1>
+        <div class="skills-container">
+        <div class="skill-category">
+            <h2>Core Skills</h2>
+            <ul>
+            <li>Python, JavaScript</li>
+            <li>Django, Flask</li>
+            <li>HTML5, CSS3, ReactJS</li>
+            <li>MySQL, SQLite</li>
+            </ul>
+        </div>
+
+        <div class="skill-category">
+            <h2>Tools & Design</h2>
+            <ul>
+            <li>Figma, Canva</li>
+            <li>Git, GitHub</li>
+        </ul>
+        </div>
+        </div>
+    </section>
+
+    <section id="works">
+        <h1>Works</h1>
+        <div class="projects-grid">
+        <div class="project">
+            <img src="C:\Users\Janan\OneDrive\Desktop\janani portfolio\project\Screenshot 2026-01-31 185339.png" alt="E-commerce" />
+            <div class="project-content">
+            <h2>E-commerce Website</h2>
+            <p>
+                Built a responsive e-commerce interface with product listing and
+                cart flow.
+            </p>
+
+            <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+            <a
+                href="https://janani150.github.io/E-commerce/"
+                target="_blank"
+                class="my_button"
+                >View Project</a
+            >
+            </div>
+        </div>
+
+        <div class="project">
+            <img src="C:\Users\Janan\OneDrive\Desktop\janani portfolio\project\Screenshot 2026-01-31 185402.png" alt="AI Study Buddy" />
+            <div class="project-content">
+            <h2>AI Study Buddy</h2>
+            <p>
+                A platform that helps users interact with AI tools to assist in
+                learning.
+            </p>
+            <p><strong>Technologies:</strong> Streamlit, Python</p>
+            <a
+                href="https://ai-study-buddy-brprkbxetgbxtzkbeaflr9.streamlit.app/"
+                target="_blank"
+                class="my_button"
+                >View Project</a
+            >
+            </div>
+        </div>
+
+        <div class="project">
+            <img src="C:\Users\Janan\OneDrive\Desktop\janani portfolio\project\Screenshot 2026-01-31 185425.png" alt="E-learning" />
+            <div class="project-content">
+            <h2>Online Learning Platform</h2>
+            <p>
+                A platform for users to access and participate in online courses.
+            </p>
+            <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+            <a
+                href="https://janani150.github.io/E-learning-platform/"
+                target="_blank"
+                class="my_button"
+                >View Project</a
+            >
+            </div>
+        </div>
+
+        <div class="project">
+            <img
+            src="C:\Users\Janan\OneDrive\Desktop\janani portfolio\project\Screenshot 2026-01-31 185451.png"
+            alt="TasteHub"
+        />
+        <div class="project-content">
+            <h2>Online Restaurant Website (TasteHub)</h2>
+            <p>A clean and responsive website for a restaurant.</p>
+            <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+            <a
+                href="https://janani150.github.io/food-restaurant/"
+                target="_blank"
+                class="my_button"
+                >View Project</a
+            >
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <h1>Education</h1>
+        <div class="education-grid">
+        <div class="card school">
+            <h2>St. Mary's Matriculation Higher Secondary School</h2>
+            <p>Computer Science - HSC</p>
+            <p>2021 - 2024</p>
+            <p>Percentage: 75%</p>
+        </div>
+
+        <div class="card college">
+            <h2>Jeppiaar Institute of Technology</h2>
+            <p>B.E. (Computer Science and Engineering)</p>
+            <p>2023 - 2027</p>
+            <p>Current CGPA: 8.17</p>
+        </div>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <h1>Certifications</h1>
+        <div class="card cert-grid">
+        <ul
+            style="
+            list-style: none;
+            padding: 0;
+            font-size: 1.1rem;
+            line-height: 2.1;
+            "
+        >
+            <li>
+            <a
+                href="C:\Users\Janan\OneDrive\Desktop\janani portfolio\certification\CertificateOfCompletion_Figma for UX Design.pdf"
+                target="_blank"
+                style="color: var(--primary)"
+                >Figma For UX Design</a
+            >
+            </li>
+            <li>
+            <a
+                href="C:\Users\Janan\OneDrive\Desktop\janani portfolio\certification\Introduction_to_Front_End_Development.pdf"
+                target="_blank"
+                style="color: var(--primary)"
+                >Introduction To Front End Development</a
+            >
+            </li>
+            <li>
+            <a
+                href="C:\Users\Janan\OneDrive\Desktop\janani portfolio\certification\Google Cloud Computing Foundations.pdf"
+                target="_blank"
+                style="color: var(--primary)"
+                >Google Cloud Computing Foundations by NPTEL</a>
+            </li>
+            <li>
+            <a
+                href="c:\Users\Janan\OneDrive\Desktop\janani portfolio\certification\Fundamentals of Python Programming.pdf"
+                target="_blank"
+                style="color: var(--primary)"
+                >Fundamentals of Python Programming</a>
+            </li>
+            <li>
+            <a
+                href="C:\Users\Janan\OneDrive\Desktop\janani portfolio\certification\Python Programming with Projects.pdf"
+                target="_blank"
+                style="color: var(--primary)"
+                >Python Programming with Projects</a>
+            </li>
+            <li>
+            <a
+                href="C:\Users\Janan\OneDrive\Desktop\janani portfolio\certification\Learn SQL for Oracle Databases - Using Toad from Scratch.pdf"
+                target="_blank"
+                style="color: var(--primary)"
+                >Learn SQL for Oracle Databases - Using Toad from Scratch</a>
+            </li>
+        </ul>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h1>Get in Touch</h1>
+        <div class="contact-container">
+        <div class="getintouch card">
+            <p>If you have any questions or inquiries, feel free to reach out!</p>
+            <p>
+                <strong>Email:</strong>
+                <a href="mailto:janani8362@gmail.com" style="color: var(--primary);">
+    janani8362@gmail.com
+</a>
+</p>
+
+        </div>
+
+        
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Janani | Built with passion ❤️ | Python Full-Stack Developer</p>
+    </footer>
+
+    <script>
+        window.addEventListener("scroll", () => {
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-center a");
+
+        let current = "";
+
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop - 150;
+            if (scrollY >= sectionTop) {
+            current = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+            }
+        });
+        });
+    </script>
+</body>
+</html>
